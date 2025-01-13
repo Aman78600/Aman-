@@ -1,248 +1,312 @@
-/**
-* Template Name: Kelly
-* Template URL: https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/
-* Updated: Mar 17 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 (function() {
-  "use strict";
+    "use strict";
 
-  /**
-   * Easy selector helper function
-   */
-  const select = (el, all = false) => {
-    el = el.trim()
-    if (all) {
-      return [...document.querySelectorAll(el)]
-    } else {
-      return document.querySelector(el)
+    /**
+     * Easy selector helper function
+     */
+    const select = (el, all = false) => {
+        el = el.trim()
+        if (all) {
+            return [...document.querySelectorAll(el)]
+        } else {
+            return document.querySelector(el)
+        }
     }
-  }
 
-  /**
-   * Easy event listener function
-   */
-  const on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
-    if (selectEl) {
-      if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
-      } else {
-        selectEl.addEventListener(type, listener)
-      }
+    /**
+     * Easy event listener function
+     */
+    const on = (type, el, listener, all = false) => {
+        let selectEl = select(el, all)
+        if (selectEl) {
+            if (all) {
+                selectEl.forEach(e => e.addEventListener(type, listener))
+            } else {
+                selectEl.addEventListener(type, listener)
+            }
+        }
     }
-  }
 
-  /**
-   * Easy on scroll event listener 
-   */
-  const onscroll = (el, listener) => {
-    el.addEventListener('scroll', listener)
-  }
+    /**
+     * Easy on scroll event listener 
+     */
+    const onscroll = (el, listener) => {
+        el.addEventListener('scroll', listener)
+    }
 
-  /**
-   * Scrolls to an element with header offset
-   */
-  const scrollto = (el) => {
-    let header = select('#header')
-    let offset = header.offsetHeight
+    /**
+     * Scrolls to an element with header offset
+     */
+    const scrollto = (el) => {
+        let header = select('#header')
+        let offset = header.offsetHeight
 
-    let elementPos = select(el).offsetTop
-    window.scrollTo({
-      top: elementPos - offset,
-      behavior: 'smooth'
+        let elementPos = select(el).offsetTop
+        window.scrollTo({
+            top: elementPos - offset,
+            behavior: 'smooth'
+        })
+    }
+
+    /**
+     * Back to top button
+     */
+    let backtotop = select('.back-to-top')
+    if (backtotop) {
+        const toggleBacktotop = () => {
+            if (window.scrollY > 100) {
+                backtotop.classList.add('active')
+            } else {
+                backtotop.classList.remove('active')
+            }
+        }
+        window.addEventListener('load', toggleBacktotop)
+        onscroll(document, toggleBacktotop)
+    }
+
+    /**
+     * Mobile nav toggle
+     */
+    on('click', '.mobile-nav-toggle', function(e) {
+        select('#navbar').classList.toggle('navbar-mobile')
+        this.classList.toggle('bi-list')
+        this.classList.toggle('bi-x')
     })
-  }
 
-  /**
-   * Back to top button
-   */
-  let backtotop = select('.back-to-top')
-  if (backtotop) {
-    const toggleBacktotop = () => {
-      if (window.scrollY > 100) {
-        backtotop.classList.add('active')
-      } else {
-        backtotop.classList.remove('active')
-      }
-    }
-    window.addEventListener('load', toggleBacktotop)
-    onscroll(document, toggleBacktotop)
-  }
+    /**
+     * Mobile nav dropdowns activate
+     */
+    on('click', '.navbar .dropdown > a', function(e) {
+        if (select('#navbar').classList.contains('navbar-mobile')) {
+            e.preventDefault()
+            this.nextElementSibling.classList.toggle('dropdown-active')
+        }
+    }, true)
 
-  /**
-   * Mobile nav toggle
-   */
-  on('click', '.mobile-nav-toggle', function(e) {
-    select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
-  })
+    /**
+     * Scrool with ofset on links with a class name .scrollto
+     */
+    on('click', '.scrollto', function(e) {
+        if (select(this.hash)) {
+            e.preventDefault()
 
-  /**
-   * Mobile nav dropdowns activate
-   */
-  on('click', '.navbar .dropdown > a', function(e) {
-    if (select('#navbar').classList.contains('navbar-mobile')) {
-      e.preventDefault()
-      this.nextElementSibling.classList.toggle('dropdown-active')
-    }
-  }, true)
+            let navbar = select('#navbar')
+            if (navbar.classList.contains('navbar-mobile')) {
+                navbar.classList.remove('navbar-mobile')
+                let navbarToggle = select('.mobile-nav-toggle')
+                navbarToggle.classList.toggle('bi-list')
+                navbarToggle.classList.toggle('bi-x')
+            }
+            scrollto(this.hash)
+        }
+    }, true)
 
-  /**
-   * Scrool with ofset on links with a class name .scrollto
-   */
-  on('click', '.scrollto', function(e) {
-    if (select(this.hash)) {
-      e.preventDefault()
-
-      let navbar = select('#navbar')
-      if (navbar.classList.contains('navbar-mobile')) {
-        navbar.classList.remove('navbar-mobile')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
-      }
-      scrollto(this.hash)
-    }
-  }, true)
-
-  /**
-   * Scroll with ofset on page load with hash links in the url
-   */
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      if (select(window.location.hash)) {
-        scrollto(window.location.hash)
-      }
-    }
-  });
-
-  /**
-   * Preloader
-   */
-  let preloader = select('#preloader');
-  if (preloader) {
+    /**
+     * Scroll with ofset on page load with hash links in the url
+     */
     window.addEventListener('load', () => {
-      preloader.remove()
+        if (window.location.hash) {
+            if (select(window.location.hash)) {
+                scrollto(window.location.hash)
+            }
+        }
     });
-  }
 
-  /**
-   * Porfolio isotope and filter
-   */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item'
-      });
-
-      let portfolioFilters = select('#portfolio-flters li', true);
-
-      on('click', '#portfolio-flters li', function(e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
+    /**
+     * Preloader
+     */
+    let preloader = select('#preloader');
+    if (preloader) {
+        window.addEventListener('load', () => {
+            preloader.remove()
         });
-        this.classList.add('filter-active');
-
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        portfolioIsotope.on('arrangeComplete', function() {
-          AOS.refresh()
-        });
-      }, true);
     }
 
-  });
+    /**
+     * Porfolio isotope and filter
+     */
+    window.addEventListener('load', () => {
+        let portfolioContainer = select('.portfolio-container');
+        if (portfolioContainer) {
+            let portfolioIsotope = new Isotope(portfolioContainer, {
+                itemSelector: '.portfolio-item'
+            });
 
-  /**
-   * Initiate portfolio lightbox 
-   */
-  const portfolioLightbox = GLightbox({
-    selector: '.portfolio-lightbox'
-  });
+            let portfolioFilters = select('#portfolio-flters li', true);
 
-  /**
-   * Initiate portfolio details lightbox 
-   */
-  const portfolioDetailsLightbox = GLightbox({
-    selector: '.portfolio-details-lightbox',
-    width: '90%',
-    height: '90vh'
-  });
+            on('click', '#portfolio-flters li', function(e) {
+                e.preventDefault();
+                portfolioFilters.forEach(function(el) {
+                    el.classList.remove('filter-active');
+                });
+                this.classList.add('filter-active');
 
-  /**
-   * Portfolio details slider
-   */
-  new Swiper('.portfolio-details-slider', {
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
+                portfolioIsotope.arrange({
+                    filter: this.getAttribute('data-filter')
+                });
+                portfolioIsotope.on('arrangeComplete', function() {
+                    AOS.refresh()
+                });
+            }, true);
+        }
 
-  /**
-   * Skills animation
-   */
-  let skilsContent = select('.skills-content');
-  if (skilsContent) {
-    new Waypoint({
-      element: skilsContent,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = select('.progress .progress-bar', true);
-        progress.forEach((el) => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%'
-        });
-      }
-    })
-  }
-
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
-
-  /**
-   * Animation on scroll
-   */
-  window.addEventListener('load', () => {
-    AOS.init({
-      duration: 1000,
-      easing: "ease-in-out",
-      once: true,
-      mirror: false
     });
-  });
 
-  /**
-   * Initiate Pure Counter 
-   */
-  new PureCounter();
+    /**
+     * Initiate portfolio lightbox 
+     */
+    const portfolioLightbox = GLightbox({
+        selector: '.portfolio-lightbox'
+    });
+
+    /**
+     * Initiate portfolio details lightbox 
+     */
+    const portfolioDetailsLightbox = GLightbox({
+        selector: '.portfolio-details-lightbox',
+        width: '90%',
+        height: '90vh'
+    });
+
+    /**
+     * Portfolio details slider
+     */
+    new Swiper('.portfolio-details-slider', {
+        speed: 400,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true
+        }
+    });
+
+    /**
+     * Skills animation
+     */
+    let skilsContent = select('.skills-content');
+    if (skilsContent) {
+        new Waypoint({
+            element: skilsContent,
+            offset: '80%',
+            handler: function(direction) {
+                let progress = select('.progress .progress-bar', true);
+                progress.forEach((el) => {
+                    el.style.width = el.getAttribute('aria-valuenow') + '%'
+                });
+            }
+        })
+    }
+
+    /**
+     * Testimonials slider
+     */
+    new Swiper('.testimonials-slider', {
+        speed: 600,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false
+        },
+        slidesPerView: 'auto',
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true
+        }
+    });
+
+    /**
+     * Animation on scroll
+     */
+    window.addEventListener('load', () => {
+        AOS.init({
+            duration: 1000,
+            easing: "ease-in-out",
+            once: true,
+            mirror: false
+        });
+    });
+
+    /**
+     * Initiate Pure Counter 
+     */
+    new PureCounter();
 
 })()
+document.getElementById('submit_Button_').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Clear previous error messages
+    document.getElementById('in_name_error').textContent = '';
+
+    // Get form data
+    var name = document.getElementById('in_name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var subject = document.getElementById('subject').value.trim();
+    var message = document.querySelector('textarea[name="message"]').value.trim();
+
+    let isValid = true;
+
+    // Validate Name
+    if (name === '') {
+        document.getElementById('in_name_error').textContent = '*Name is required*';
+        isValid = false;
+    }
+
+    // Validate Email
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('*Please enter a valid email address*');
+        isValid = false;
+    }
+
+    // Validate Subject
+    if (subject === '') {
+        alert('*Subject is required*');
+        isValid = false;
+    }
+
+    // Validate Message
+    if (message === '') {
+        alert('*Message is required*');
+        isValid = false;
+    }
+
+    // If all fields are valid, send the inquiry data
+    console.log(name, email, subject, message);
+
+    if (isValid) {
+        send_inquiry_data(name, email, subject, message);
+    }
+});
+
+function send_inquiry_data(name, email, subject, message) {
+    let templateParams = {
+        name: name,
+        email: email, // Corrected 'mail' to 'email'
+        subject: subject,
+        message: message
+    };
+
+    emailjs.send('service_ycxu6wh', 'template_u99vg8l', templateParams) // Replace with your EmailJS service ID and template ID
+        .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                alert('Your inquiry has been sent successfully!');
+
+
+                // Clear form fields after successful submission
+                document.getElementById('in_name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('subject').value = '';
+                document.querySelector('textarea[name="message"]').value = '';
+            },
+            function(error) {
+                console.error('FAILED...', error);
+                alert('Oops! Something went wrong. Please try again later.');
+            }
+        );
+}

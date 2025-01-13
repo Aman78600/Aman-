@@ -2,6 +2,7 @@
     --main--color: #00ffe1;
     --second-font: #6f6f6f;
     --white: #fff;
+    --background-color: rgba(0, 0, 0, 0.529);
 }
 
 
@@ -11,8 +12,7 @@
 
 body {
     font-family: "Open Sans", sans-serif;
-    color: #fffefe;
-    background-color: #111;
+    color: #010101;
 }
 
 a {
@@ -123,7 +123,7 @@ h6 {
 --------------------------------------------------------------*/
 
 #header {
-    background: #020202;
+    background: #0202026b;
     box-shadow: 0px 0px 25px 0 rgba(0, 0, 0, 0.08);
     z-index: 997;
     padding: 15px 0;
@@ -167,7 +167,7 @@ h6 {
 }
 
 .header-social-links a {
-    color: #fefefe;
+    color: #ffffff;
     padding-left: 6px;
     display: inline-block;
     line-height: 0px;
@@ -214,7 +214,7 @@ h6 {
     font-family: "Raleway", sans-serif;
     font-size: 15px;
     font-weight: 600;
-    color: #888888;
+    color: #ffffff;
     white-space: nowrap;
     transition: 0.3s;
     position: relative;
@@ -251,7 +251,7 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-    color: #ffffff;
+    color: #b0acac;
 }
 
 .navbar .dropdown ul {
@@ -433,14 +433,28 @@ h6 {
 
 
 /*--------------------------------------------------------------
+# Background Section
+--------------------------------------------------------------*/
+
+.chat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    z-index: -5;
+    position: fixed;
+    background: rgb(0, 0, 0);
+}
+
+
+/*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
 
 #hero {
     width: 100%;
     height: 100vh;
-    background: url("../img/hero-bg.png") top right;
-    background-size: cover;
 }
 
 #hero .container {
@@ -456,10 +470,11 @@ h6 {
 
 #hero h1 {
     margin: 0;
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 90px;
+    font-weight: 1000;
     line-height: 56px;
-    color: #222222;
+    color: #000000;
+    text-shadow: 1px 1px 2px rgb(251, 251, 251), 0 0 1em rgb(154, 154, 156), 0 0 0.2em rgb(252, 252, 252);
 }
 
 #hero h2 {
@@ -484,7 +499,9 @@ h6 {
 }
 
 #hero .btn-about:hover {
-    background: #3dc8b7;
+    background: #fcfcfc;
+    color: #34b7a7;
+    box-shadow: 5px 5px black;
 }
 
 @media (min-width: 1024px) {
@@ -496,7 +513,7 @@ h6 {
 @media (max-width: 992px) {
     #hero:before {
         content: "";
-        background: rgba(255, 255, 255, 0.8);
+        /* background: rgba(255, 255, 255, 0.8); */
         position: absolute;
         bottom: 0;
         top: 0;
@@ -616,6 +633,10 @@ section {
 # About
 --------------------------------------------------------------*/
 
+.container-decoration {
+    background-color: rgb(255, 254, 254);
+}
+
 .about .content h3 {
     font-weight: 700;
     font-size: 26px;
@@ -650,6 +671,12 @@ strong {
 /*--------------------------------------------------------------
 # Skills
 --------------------------------------------------------------*/
+
+
+/* .skills>.section-title>p{
+    text-shadow: rgb(0, 0, 0) 1px 0 10px; 
+    color: white;
+} */
 
 .skills .progress {
     height: 60px;
@@ -969,6 +996,15 @@ strong {
 # Portfolio
 --------------------------------------------------------------*/
 
+.Project_heding {
+    text-shadow: rgb(227, 227, 224) 1px 0 10px;
+}
+
+.project_text {
+    text-shadow: rgb(0, 0, 0) 1px 0 10px;
+    color: white;
+}
+
 .portfolio .portfolio-item {
     margin-bottom: 30px;
 }
@@ -983,12 +1019,12 @@ strong {
 .portfolio #portfolio-flters li {
     cursor: pointer;
     display: inline-block;
-    padding: 8px 16px 10px 16px;
+    padding: 8px 16px 8px 16px;
     font-size: 13px;
     font-weight: 500;
     line-height: 1;
     text-transform: uppercase;
-    color: #444444;
+    color: #34b7a7;
     margin-bottom: 5px;
     transition: all 0.3s ease-in-out;
     border-radius: 50px;
@@ -998,6 +1034,7 @@ strong {
 .portfolio #portfolio-flters li.filter-active {
     color: #fff;
     background: #34b7a7;
+    box-shadow: 5px 5px #575757;
 }
 
 .portfolio #portfolio-flters li:last-child {
@@ -1185,7 +1222,7 @@ strong {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 5px;
-    color: #ffffff;
+    color: #000000;
 }
 
 .contact .info p {
